@@ -1,0 +1,10 @@
+---
+helm:
+  global:
+      cluster:
+        type: 'eks'
+      fqdn: 'bmutziu-eks'
+      aws:
+        profile: 'default'
+      region:
+        location: 'eu-west-1'

@@ -1,0 +1,24 @@
+cloud:
+  type: aws
+account:
+  cloud_provider:
+    aws:
+      profile: test_profile
+env:
+  name: dev
+region:
+  location: eu-west-1
+  name: va6
+project:
+  prefix: ee
+cluster:
+  name: cluster1
+helm:
+  global:
+    aws:
+      profile: default
+    cluster:
+      type: eks
+    fqdn: cluster1
+    region:
+      location: eu-west-1

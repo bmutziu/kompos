@@ -1,0 +1,9 @@
+helm:
+  global:
+      cluster:
+        type: 'eks'
+      fqdn: 'cluster1'
+      aws:
+        profile: 'default'
+      region:
+        location: 'eu-west-1'

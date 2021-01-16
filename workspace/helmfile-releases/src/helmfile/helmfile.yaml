@@ -1,0 +1,16 @@
+repositories:
+  - name: incubator
+    url: https://charts.helm.sh/incubator
+
+releases:
+  - name: ingress
+    namespace: kube-system
+    chart: incubator/aws-alb-ingress-controller
+    version: 1.0.4
+    set:
+     - name: clusterName
+       value: cluster1
+     - name: autoDiscoverAwsRegion
+       value: true
+     - name: autoDiscoverAwsVpcID
+       value: true
