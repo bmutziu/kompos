@@ -8,3 +8,16 @@ compositions:
       - spinnaker
     helmfile:
       - helmfiles
+terraform:
+  local_path: '/home/bmutziu/work/k8s/kompos'
+  root_path: 'workspace/terraform-stack/src/terraform'
+  repo:
+    name: 'terraform-stack'
+    url: "git@github.com:bmutziu/terraform-stack.git"
+helmfile:
+  local_path: '/home/bmutziu/work/k8s/kompos'
+  root_path: 'workspace/helmfile-releases/src/helmfile'
+  repo:
+    name: 'helmfile-releases'
+    url: "git@github.com:bmutziu/helmfiles-releases.git"
+nix: false

@@ -1,0 +1,8 @@
+eat:
+  this: now
+terraform:
+  required_providers:
+      kubernetes:
+        version: ~> 1.11
+      helm:
+        version: = 1.3.2

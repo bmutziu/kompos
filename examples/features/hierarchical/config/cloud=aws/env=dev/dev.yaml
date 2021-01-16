@@ -7,7 +7,7 @@ env:
   name: dev
 
 region:
-  location: us-east-1
+  location: eu-west-1
   name: va6
 
 project:
