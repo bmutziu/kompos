@@ -26,10 +26,10 @@ pkgs.stdenv.mkDerivation {
   name    = "$name";
   version = "$version";
 
-  src = pkgs.fetchgit {
+  src = builtins.fetchGit {
     url    = "$url";
     rev    = "$rev";
-    sha256 = "$sha256";
+#    sha256 = "$sha256";
   };
 
   installPhase = ''
@@ -143,6 +143,12 @@ def writeable_nix_out_path(name):
     )
 
     copy_tree(out_path, tmp_dir)
+
+    for root, dirs, files in os.walk(tmp_dir):
+        for d in dirs:
+            os.chmod(os.path.join(root, d),0o775)
+        for f in files:
+            os.chmod(os.path.join(root, f),0o644)
 
     return tmp_dir
 
