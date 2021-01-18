@@ -21,3 +21,9 @@ helmfile:
     name: 'helmfile-releases'
     url: "git@github.com:bmutziu/helmfiles-releases.git"
 nix: true
+vault:
+  enabled: true
+  svc_ldap_user: demo
+  svc_ldap_user_role: secret
+  url: bmutziu.me
+  vault_namespace: parameter

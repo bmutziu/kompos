@@ -37,10 +37,19 @@ class ConfigGeneratorParserConfig(SubParserConfig):
 
 
 class ConfigGeneratorRunner(HierarchicalConfigGenerator):
-    def __init__(self, kompos_config, cluster_config_path):
+    def __init__(self, kompos_config, cluster_config_path, execute):
         super(ConfigGeneratorRunner, self).__init__()
         self.kompos_config = kompos_config
         self.cluster_config_path = cluster_config_path
+        self.execute = execute
+
+    def setup_ssm_config(self, USERNAME, ROLE, NAMESPACE):
+        cmd = "python ~/work/k8s/kompos/retrieve_and_decrypt_ssm_secret.py '/{}/{}/{}'".format(USERNAME, ROLE, NAMESPACE)
+        return_code = self.execute(dict(command=cmd))
+        if return_code != 0:
+            raise Exception(
+                    "Unable to retrieve SSM config. Exit code was{}".format(return_code))
+        return return_code
 
     def run(self, args, extra_args):
         if not os.path.isdir(self.cluster_config_path):
@@ -78,3 +87,14 @@ class ConfigGeneratorRunner(HierarchicalConfigGenerator):
             skip_secrets=args.skip_secrets,
             multi_line_string=True
         )
+
+        ADDR = os.getenv('VAULT_ADDR')
+        USERNAME = os.environ.get('VAULT_USERNAME')
+        ROLE = os.environ.get('VAULT_ROLE')
+        NAMESPACE = os.environ.get('VAULT_NAMESPACE')
+        logger.info("Vault URL %s", ADDR)
+        logger.info("Vault username %s", USERNAME)
+        logger.info("Vault role %s", ROLE)
+        logger.info("Vault namespace %s", NAMESPACE)
+
+        self.setup_ssm_config(USERNAME, ROLE, NAMESPACE)

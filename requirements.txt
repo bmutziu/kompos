@@ -2,3 +2,5 @@ simpledi>=0.2
 PyYAML==5.1
 himl==0.5.6
 fastjsonschema==2.14.*
+boto3==1.16.54
+urllib3==1.26.2
